@@ -36,9 +36,13 @@ Usage: ./ImageGen-AI [--query|-q QUERY] [--output|-o OUTPUT_FILE] [--api|-a API_
 
 ```
 #### Example
+
+Using Polinations AI API
 ```
 ./ImageGen-AI -q "a cute cat with sword" -a polination -o cat1.png -d
 ```
+
+Using Replicate AI API
 ```
 ./ImageGen-AI -q "a cute cat with sword" -a replicate -o cat2.png -d
 ```
