@@ -39,6 +39,10 @@ Usage: ./ImageGen-AI [--query|-q QUERY] [--output|-o OUTPUT_FILE] [--api|-a API_
 ```
 ./ImageGen-AI -q "a cute cat with sword" -a polination -o cat1.png -d
 ```
+
+![CAT 1](https://github.com/mkdirlove/ImageGen-AI/blob/master/cat1.png)
 ```
 ./ImageGen-AI -q "a cute cat with sword" -a replicate -o cat1.png -d
 ```
+
+![CAT 2](https://github.com/mkdirlove/ImageGen-AI/blob/master/cat2.png)
