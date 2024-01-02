@@ -17,7 +17,11 @@ git clone https://github.com/mkdirlove/ImageGen-AI.git
 cd ImageGen-AI
 ```
 ```
-./ImageGen-AI
+bash ImageGen-AI.sh
+```
+or
+```
+bash ImageGen-AI.sh -h
 ```
 #### Usage
 ``` 
@@ -39,10 +43,10 @@ Usage: ./ImageGen-AI [--query|-q QUERY] [--output|-o OUTPUT_FILE] [--api|-a API_
 
 Using Polinations AI API
 ```
-./ImageGen-AI -q "a cute cat with sword" -a polination -o cat1.png -d
+bash ImageGen-AI.sh -q "a cute cat with sword" -a polination -o cat1.png -d
 ```
 
 Using Replicate AI API
 ```
-./ImageGen-AI -q "a cute cat with sword" -a replicate -o cat2.png -d
+bash ImageGen-AI.sh -q "a cute cat with sword" -a replicate -o cat2.png -d
 ```
