@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+
+# Color codes
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Default values
+query="default_value"
+output_file="output.png"
+display_image=false
+selected_api=""
+
+# Function to display usage information
+function show_usage {
+  echo -e "${YELLOW}	┳         ┏┓      ┏┓┳${NC}"
+  echo -e "${YELLOW} 	┃┏┳┓┏┓┏┓┏┓┃┓┏┓┏┓━━┣┫┃${NC}"
+  echo -e "${YELLOW} 	┻┛┗┗┗┻┗┫┗ ┗┛┗ ┛┗  ┛┗┻${NC}"
+  echo -e "${YELLOW}               ┛             ${NC}"
+  echo -e "${GREEN}  An AI based image generation tool.${NC}"
+  echo ""
+  echo -e "Usage: $0 [--query|-q QUERY] [--output|-o OUTPUT_FILE] [--api|-a API_NAME] [--display|-d] [--help|-h]"
+  echo -e "  ${GREEN}--query, -q${NC}      Specify the query for the selected API"
+  echo -e "  ${GREEN}--output, -o${NC}     Specify the output file for the image"
+  echo -e "  ${GREEN}--api, -a${NC}        Specify the API to use ('polination' or 'replicate')"
+  echo -e "  ${GREEN}--display, -d${NC}    Display the image in the terminal"
+  echo -e "  ${GREEN}--help, -h${NC}       Display this help message"
+  exit 1
+}
+
+# Function to validate selected API
+function validate_api {
+  if [ "$selected_api" != "polination" ] && [ "$selected_api" != "replicate" ]; then
+    echo -e "${RED}Invalid API selected. Please use 'poli' or 'luosiallen'.${NC}"
+    exit 1
+  fi
+}
+
+# Function to perform GET request using curl
+function perform_curl_request {
+  local api_url=""
+  if [ "$selected_api" == "polination" ]; then
+    api_url="https://api.easy0.repl.co/api/poli?q=${encoded_query}"
+  elif [ "$selected_api" == "replicate" ]; then
+    api_url="https://api.easy0.repl.co/api/luosiallen?q=${encoded_query}"
+  fi
+
+  curl -s -X 'GET' "${api_url}" -H 'accept: image/png' -o "${output_file}"
+}
+
+# Function to display the image in the terminal
+function display_image {
+  if command -v imgcat &> /dev/null; then
+    imgcat "${output_file}"
+  elif command -v catimg &> /dev/null; then
+    catimg "${output_file}"
+  else
+    echo -e "${YELLOW}To display the image in the terminal, please install imgcat or catimg.${NC}"
+  fi
+}
+
+# Main function
+function main {
+  # Display help if no arguments are provided
+  if [ "$#" -eq 0 ]; then
+    show_usage
+  fi
+
+  # Parse command line arguments
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+      --query|-q)
+        query="$2"
+        shift
+        ;;
+      --output|-o)
+        output_file="$2"
+        shift
+        ;;
+      --api|-a)
+        selected_api="$2"
+        shift
+        ;;
+      --display|-d)
+        display_image=true
+        ;;
+      --help|-h)
+        show_usage
+        ;;
+      *)
+        # Unknown option
+        show_usage
+        ;;
+    esac
+    shift
+  done
+
+  # URL encode the query parameter
+  encoded_query=$(echo "${query}" | sed 's/ /%20/g')
+
+  # Validate selected API
+  validate_api
+
+  # Perform GET request using curl
+  perform_curl_request
+
+  # Display the image in the terminal if requested
+  if [ "$display_image" = true ]; then
+    display_image
+  fi
+}
+
+# Execute the main function
+main "$@"
