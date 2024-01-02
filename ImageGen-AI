@@ -31,7 +31,7 @@ function show_usage {
 
 # Function to validate selected API
 function validate_api {
-  if [ "$selected_api" != "poli" ] && [ "$selected_api" != "luosiallen" ]; then
+  if [ "$selected_api" != "polination" ] && [ "$selected_api" != "replicate" ]; then
     echo -e "${RED}Invalid API selected. Please use 'poli' or 'luosiallen'.${NC}"
     exit 1
   fi
