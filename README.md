@@ -24,7 +24,7 @@ cd ImageGen-AI
 	┳         ┏┓      ┏┓┳
  	┃┏┳┓┏┓┏┓┏┓┃┓┏┓┏┓━━┣┫┃
  	┻┛┗┗┗┻┗┫┗ ┗┛┗ ┛┗  ┛┗┻
-         ┛             
+               ┛             
   An AI based image generation tool.
 
 Usage: ./ImageGen-AI [--query|-q QUERY] [--output|-o OUTPUT_FILE] [--api|-a API_NAME] [--display|-d] [--help|-h]
